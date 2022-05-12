@@ -8,8 +8,6 @@
     <title>Scatter Plot animation</title>
     <script type="text/javascript" src="d3.js"></script>
     <link rel="stylesheet" href="style.css">
-
-
   </head>
 
   <body>
@@ -17,7 +15,6 @@
     <section class="frontpage">
 
       <h1 style="font-family:helvetica;">VIL DU GERNE SIGE "HAJ HAJ" TIL DINE BØRN OM 20 ÅR?</h1>
-
 
     </section>
 
@@ -85,8 +82,10 @@
 
 
 
+    <section class="seaplants">
+      <h1 style="font-family:helvetica;">FÅR DETTE DIG TIL AT FØLE SKYLDIGT?</h1>
 
-
+    </section>
 
 
 
@@ -183,6 +182,73 @@
             });
         });
     </script>
+
+
+<section class="facts">
+  <div class="main">
+  </div>
+  
+  <div class="information">
+    <div class="overlay"></div>
+    <img src="earth.png" class ="earth">
+    <div id="circle">
+      <div class="feature one">
+        <div>
+          <h1>Take the bike</h1>
+        </div>
+      </div>
+      <div class="feature two">
+        <div>
+          <h1>Take the bus</h1>
+        </div>
+      </div>
+      <div class="feature three">
+        <div>
+          <h1>Take the train</h1>
+        </div>
+      </div>
+      <div class="feature four">
+        <div>
+          <h1>Walk</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <img src="arrow.png" id="upBtn">
+      <h3>Klik</h3>
+      <img src="arrow.png" id="downBtn">
+    </div>
+
+  </div>
+
+  <script>
+     var circle = document.getElementById("circle")
+     var upBtn = document.getElementById("upBtn")
+     var downBtn = document.getElementById("downBtn")
+
+    var rotateValue = circle.style.transform;
+    var rotateSum;
+
+    upBtn.onclick = function()
+    {
+      rotateSum = rotateValue + "rotate(-90deg)"; 
+      circle.style.transform = rotateSum; 
+      rotateValue = rotateSum;
+    }
+    downBtn.onclick = function()
+    {
+      rotateSum = rotateValue + "rotate(90deg)"; 
+      circle.style.transform = rotateSum; 
+      rotateValue = rotateSum;
+    }
+
+  </script>
+
+</section>
+
+
+
   </body>
 
 </html>
