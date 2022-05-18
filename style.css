@@ -187,10 +187,10 @@ p {
     padding-top: 50px;
 }
 .global{
-    background-color: rgb(176, 241, 219);
+    background-color: rgb(59, 116, 97);
 }
 
-.global h1 {
+.global h2 {
     text-align: center;
-    padding-top: 50px;
+    padding-top: 100px;
 }
