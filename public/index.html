@@ -1,45 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <script src="scripts/d3.js"></script>
-  <title>Postgres node.js template med d3.js</title>
-</head>
+<body style="background-color:powderblue;">
 
+  <head>
+    <meta charset="utf-8">
+    <title>Scatter Plot animation</title>
+    <script type="text/javascript" src="d3.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+
+  <body>
+
+    <section class="frontpage">
+      <h1 style="font-family:helvetica;">VIL DU GERNE SIGE "HAJ HAJ" TIL DINE BØRN OM 20 ÅR?</h1>
+    </section>
+
+
+    <section class="firstsection">
+      <div class="textboxwrapper">
+
+        <div class="textbox">
+          <h2>overskrift1</h2>
+          <p>I Nordatlanten har man gennem målinger de sidste 150 år påvist en naturlig svingning i havtemperaturen.
+            Relativt varme perioder på 25-35 år afløses af kølige perioder af samme varighed. Der er en forskel på op
+            til
+            0,5 grader i havtemperaturen i mellem de varme og kolde perioder. Fænomen kaldes den "Atlantiske
+            Multidekadiske Oscillation", eller blot "AMO".
+
+            <br> <br> Fænomenet ser ud til at påvirke lufttemperaturen, nedbøren og stormaktiviteten i Europa og
+            Nordamerika. Det har derfor stor betydning for det nuværende klima.
+
+            <br><br> Der er endnu ikke fundet en forklaring på de mekanismer der ligger bag fænomenet. Der er ingen
+            kobling til ændringer i solaktivitet eller solindstålingen. Den kan heller ikke tilskrives menneskeskabte
+            klimaændringer. Det mest sandsynlige er at det skydes interne variationer i havstrømmene. En forståelse af
+            processerne bag AMO'en er væsentligt for at kunne indarbejde fænomenet i klimamodellerne og dermed få bedre
+            projektioner af fremtidens klima.</p>
+        </div>
+
+        <div class="textbox">
+          <h2>overskrift2</h2>
+          <p>I Nordatlanten har man gennem målinger de sidste 150 år påvist en naturlig svingning i havtemperaturen.
+            Relativt varme perioder på 25-35 år afløses af kølige perioder af samme varighed. Der er en forskel på op
+            til
+            0,5 grader i havtemperaturen i mellem de varme og kolde perioder. Fænomen kaldes den "Atlantiske
+            Multidekadiske Oscillation", eller blot "AMO".
+
+            <br> <br> Fænomenet ser ud til at påvirke lufttemperaturen, nedbøren og stormaktiviteten i Europa og
+            Nordamerika. Det har derfor stor betydning for det nuværende klima.
+
+            <br><br> Der er endnu ikke fundet en forklaring på de mekanismer der ligger bag fænomenet. Der er ingen
+            kobling til ændringer i solaktivitet eller solindstålingen. Den kan heller ikke tilskrives menneskeskabte
+            klimaændringer. Det mest sandsynlige er at det skydes interne variationer i havstrømmene. En forståelse af
+            processerne bag AMO'en er væsentligt for at kunne indarbejde fænomenet i klimamodellerne og dermed få bedre
+            projektioner af fremtidens klima.</p>
+        </div>
+
+        <div class="textbox">
+          <h2>overskrift3</h2>
+          <p>I Nordatlanten har man gennem målinger de sidste 150 år påvist en naturlig svingning i havtemperaturen.
+            Relativt varme perioder på 25-35 år afløses af kølige perioder af samme varighed. Der er en forskel på op
+            til
+            0,5 grader i havtemperaturen i mellem de varme og kolde perioder. Fænomen kaldes den "Atlantiske
+            Multidekadiske Oscillation", eller blot "AMO".
+
+            <br> <br> Fænomenet ser ud til at påvirke lufttemperaturen, nedbøren og stormaktiviteten i Europa og
+            Nordamerika. Det har derfor stor betydning for det nuværende klima.
+
+            <br><br> Der er endnu ikke fundet en forklaring på de mekanismer der ligger bag fænomenet. Der er ingen
+            kobling til ændringer i solaktivitet eller solindstålingen. Den kan heller ikke tilskrives menneskeskabte
+            klimaændringer. Det mest sandsynlige er at det skydes interne variationer i havstrømmene. En forståelse af
+            processerne bag AMO'en er væsentligt for at kunne indarbejde fænomenet i klimamodellerne og dermed få bedre
+            projektioner af fremtidens klima.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+<section class="skagen">
+      <h1 style="font-family:helvetica;">SKAGEN TEMP</h1>
+
+      <style>
+        .bar {
+            fill: rgb(70, 180, 107);
+        }
+    </style>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
 <body>
-  <h1>Postgres node.js template med d3.js</h1>
+<!-- Vi starter med at oprette SVG og definere skalaerne for vores søjlediagram som vist nedenfor. -->
+<svg width="600" height="500"></svg> <!--original 600x500 = Størrelsen på hele grafen-->
+<script>
+
+    var svg = d3.select("svg"),
+        margin = 200,
+        width = svg.attr("width") - margin,
+        height = svg.attr("height") - margin
+
+        //Placering af "overskrift"
+    svg.append("text")
+       .attr("transform", "translate(100,0)")
+       .attr("x", 50)
+       .attr("y", 50)
+       .attr("font-size", "24px")
+       .text("Skagen 2019")
+
+    var xScale = d3.scaleBand().range([0, width]).padding(0.4),
+        yScale = d3.scaleLinear().range([height, 0]);
+
+//Nedestående kode har vi et gruppeelement til vores SVG. Vi tilføjer vores akser og bar til gruppeelementet. 
+//Vi tilføjer en transformeringsattribut for at placere vores graf med en vis margin.
+    var g = svg.append("g")
+               .attr("transform", "translate(" + 100 + "," + 100 + ")"); // Ænding af grafens placering (original 100+100)
+
+    d3.csv("skagen.csv", function(error, data) {
+        if (error) {
+            throw error;
+        }
+
+        xScale.domain(data.map(function(d) { return d.mon; }));
+        yScale.domain([0, 20]); //Her ændre vi på start og slut-værdien på y-aksel
+
+        g.append("g")
+         .attr("transform", "translate(0," + height + ")")
+         .call(d3.axisBottom(xScale))
+         .append("text")
+         .attr("y", height - 250)   //Placering af y teksten
+         .attr("x", width - 100)    //Placering af x teksten
+         .attr("text-anchor", "end")
+         .attr("stroke", "black")
+         .text("months");
+
+        g.append("g")
+         .call(d3.axisLeft(yScale).tickFormat(function(d){
+             return d + " c°" ;
+         })
+         .ticks(10))
+         .append("text")
+         .attr("transform", "rotate(-90)")
+         .attr("y", 6)
+         .attr("dy", "-5.1em")
+         .attr("text-anchor", "end")
+         .attr("stroke", "black")
+         .text("Temperature");
+
+        g.selectAll(".bar")
+         .data(data)
+         .enter().append("rect")
+         .attr("class", "bar")
+         .attr("x", function(d) { return xScale(d.mon); })
+         .attr("y", function(d) { return yScale(d.temp); })
+         .attr("width", xScale.bandwidth())
+         .attr("height", function(d) { return height - yScale(d.temp); });
+    });
+    
+</script>
+</section>
+
+<section class="global">
+  <style>
+    .bar {
+        fill: rgb(163, 31, 31);
+    }
+</style>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<!-- Vi starter med at oprette SVG og definere skalaerne for vores søjlediagram som vist nedenfor. -->
+<svg width="600" height="500"></svg> <!--original 600x500 = Størrelsen på hele grafen-->
+<script>
+
+var svg = d3.select("svg"),
+    margin = 200,
+    width = svg.attr("width") - margin,
+    height = svg.attr("height") - margin
+
+    //Placering af "overskrift"
+svg.append("text")
+   .attr("transform", "translate(100,0)")
+   .attr("x", 50)
+   .attr("y", 50)
+   .attr("font-size", "24px")
+   .text("Global")
+
+var xScale = d3.scaleBand().range([0, width]).padding(0.4),
+    yScale = d3.scaleLinear().range([height, 0]);
+
+//Nedestående kode har vi et gruppeelement til vores SVG. Vi tilføjer vores akser og bar til gruppeelementet. 
+//Vi tilføjer en transformeringsattribut for at placere vores graf med en vis margin.
+var g1 = svg.append("g1")
+           .attr("transform", "translate(" + 100 + "," + 100 + ")"); // Ænding af grafens placering (original 100+100)
+
+d3.csv("global.csv", function(error, data) {
+    if (error) {
+        throw error;
+    }
+
+    xScale.domain(data.map(function(d1) { return d1.year; }));
+    yScale.domain([0, 20]); //Her ændre vi på start og slut-værdien på y-aksel
+
+    g1.append("g1")
+     .attr("transform", "translate(0," + height + ")")
+     .call(d3.axisBottom(xScale))
+     .append("text")
+     .attr("y", height - 250)   //Placering af y teksten
+     .attr("x", width - 100)    //Placering af x teksten
+     .attr("text-anchor", "end")
+     .attr("stroke", "black")
+     .text("years");
+
+    g1.append("g1")
+     .call(d3.axisLeft(yScale).tickFormat(function(d1){
+         return d1 + " c°" ;
+     })
+     .ticks(10))
+     .append("text")
+     .attr("transform", "rotate(-90)")
+     .attr("y", 6)
+     .attr("dy", "-5.1em")
+     .attr("text-anchor", "end")
+     .attr("stroke", "black")
+     .text("Temperature");
+
+    g1.selectAll(".bar")
+     .data(data)
+     .enter().append("rect")
+     .attr("class", "bar")
+     .attr("x", function(d1) { return xScale(d1.year); })
+     .attr("y", function(d1) { return yScale(d1.value); })
+     .attr("width", xScale.bandwidth())
+     .attr("height", function(d1) { return height - yScale(d1.value); });
+});
+
+</script>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="facts">
+  <div class="main">
+  </div>
+  
+  <div class="information">
+    <div class="overlay"></div>
+    <img src="earth.png" class ="earth">
+    <div id="circle">
+      <div class="feature one">
+        <div>
+          <h1>Take the bike</h1>
+        </div>
+      </div>
+      <div class="feature two">
+        <div>
+          <h1>Take the bus</h1>
+        </div>
+      </div>
+      <div class="feature three">
+        <div>
+          <h1>Take the train</h1>
+        </div>
+      </div>
+      <div class="feature four">
+        <div>
+          <h1>Walk</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <img src="arrow.png" id="upBtn">
+      <h3>Klik</h3>
+      <img src="arrow.png" id="downBtn">
+    </div>
+
+  </div>
 
   <script>
-  // Denne query kører op imod API'en som findes i 'main.js'.
-  // Denne HTML skal derfor åbnes igennem serveren for at virke.
-  d3.json("/api/helloQuery", {
-    method: "POST", 
-  }).then(function(response) {
-    const data = response.data; // Hent data ud af response
-    console.log("data", data);
+     var circle = document.getElementById("circle")
+     var upBtn = document.getElementById("upBtn")
+     var downBtn = document.getElementById("downBtn")
 
-    const w = 500;
-    const h = 350;
+    var rotateValue = circle.style.transform;
+    var rotateSum;
 
-    // Lav SVG element
-    const svg = d3.select("body")
-      .append("svg")
-      .attr("width", w)
-      .attr("height", h);
+    upBtn.onclick = function()
+    {
+      rotateSum = rotateValue + "rotate(-90deg)"; 
+      circle.style.transform = rotateSum; 
+      rotateValue = rotateSum;
+    }
+    downBtn.onclick = function()
+    {
+      rotateSum = rotateValue + "rotate(90deg)"; 
+      circle.style.transform = rotateSum; 
+      rotateValue = rotateSum;
+    }
 
-    // Indsæt tekst fra postgres query som eksempel
-    svg.selectAll("text")
-      .data(data)
-      .enter()
-      .append("text")
-      .attr("x", 20)
-      .attr("y", 20)
-      .text(function (d) { return "Svar fra databasen: " + d.message; }) 
-      
-    // Lav din egen visualsering med data her!
-  });
-  
   </script>
-</body>
+
+</section>
+
+
+
+  </body>
+
 </html>
