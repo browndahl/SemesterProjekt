@@ -78,108 +78,84 @@
 
     </section>
 
+<section class="skagen">
+      <h1 style="font-family:helvetica;">SKAGEN TEMP</h1>
 
+      <style>
+        .bar {
+            fill: rgb(70, 180, 107);
+        }
+    </style>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+<body>
+<!-- Vi starter med at oprette SVG og definere skalaerne for vores søjlediagram som vist nedenfor. -->
+<svg width="600" height="500"></svg> <!--original 600x500 = Størrelsen på hele grafen-->
+<script>
 
-    <section class="seaplants">
-      <h1 style="font-family:helvetica;">FÅR DETTE DIG TIL AT FØLE SKYLDIGT?</h1>
+    var svg = d3.select("svg"),
+        margin = 200,
+        width = svg.attr("width") - margin,
+        height = svg.attr("height") - margin
 
-    </section>
+        //Placering af "overskrift"
+    svg.append("text")
+       .attr("transform", "translate(100,0)")
+       .attr("x", 50)
+       .attr("y", 50)
+       .attr("font-size", "24px")
+       .text("Skagen 2019")
 
+    var xScale = d3.scaleBand().range([0, width]).padding(0.4),
+        yScale = d3.scaleLinear().range([height, 0]);
 
+//Nedestående kode har vi et gruppeelement til vores SVG. Vi tilføjer vores akser og bar til gruppeelementet. 
+//Vi tilføjer en transformeringsattribut for at placere vores graf med en vis margin.
+    var g = svg.append("g")
+               .attr("transform", "translate(" + 100 + "," + 100 + ")"); // Ænding af grafens placering (original 100+100)
 
-    <h2 style="font-family: Arial, Helvetica, sans-serif; text-align: center;">Nedeunder kan du se den gennemsnitlige
-      havvandetstemperatur fra år 1970 til 2020</h2>
-    <p style="font-family: Arial, Helvetica, sans-serif; text-align: left;"> Scatter Plot animation - Herunder kan du
-      skifte imellem global, nordlige og sydlige halvkugle.</p>
+    d3.csv("XYZ.csv", function(error, data) {
+        if (error) {
+            throw error;
+        }
 
-    <button id="klik1">Datasæt 1</button>
-    <button id="klik2">Datasæt 2</button>
-    <button id="klik3">Datasæt 3</button>
+        xScale.domain(data.map(function(d) { return d.mon; }));
+        yScale.domain([0, 20]); //Her ændre vi på start og slut-værdien på y-aksel
 
-    <br />
+        g.append("g")
+         .attr("transform", "translate(0," + height + ")")
+         .call(d3.axisBottom(xScale))
+         .append("text")
+         .attr("y", height - 250)   //Placering af y teksten
+         .attr("x", width - 100)    //Placering af x teksten
+         .attr("text-anchor", "end")
+         .attr("stroke", "black")
+         .text("months");
 
-    <script type="text/javascript">
-      // Width og height
-      const w = 500;
-      const h = 300;
+        g.append("g")
+         .call(d3.axisLeft(yScale).tickFormat(function(d){
+             return d + " c°" ;
+         })
+         .ticks(10))
+         .append("text")
+         .attr("transform", "rotate(-90)")
+         .attr("y", 6)
+         .attr("dy", "-5.1em")
+         .attr("text-anchor", "end")
+         .attr("stroke", "black")
+         .text("Temperature");
 
-      // Selve datasættene
-      const dataset1 = [
-        [5, 20],
-        [480, 90],
-        [250, 50],
-        [100, 33],
-        [330, 95],
-        [410, 12],
-        [475, 44]
-      ];
-      const dataset2 = [
-        [10, 10],
-        [200, 90],
-        [200, 20],
-        [120, 13],
-        [350, 75],
-        [210, 42],
-        [275, 34]
-      ];
-      const dataset3 = [
-        [350, 20],
-        [30, 90],
-        [10, 50],
-        [105, 31],
-        [230, 295],
-        [110, 112],
-        [375, 84]
-      ];
-
-      // Lav SVG-elementet
-      const svg = d3.select("body")
-        .append("svg")
-        .attr("width", w)
-        .attr("height", h);
-
-      // Lave scatter plot (punktdiagram)
-      svg.selectAll("circle")
-        .data(dataset1)
-        .enter()
-        .append("circle")
-        .attr("cx", function (d) {
-          return d[0];
-        })
-        .attr("cy", function (d) {
-          return d[1];
-        })
-        .attr("r", 5);
-
-      // Knappen vælges via dens id 'klik'
-      d3.selectAll("#klik1, #klik2, #klik3")
-        // Koden herunder køres kun ved tryk på knappen
-        .on("click", function (e) {
-          // Find hvilken knap der blev trykket på
-          const id = e.target.id;
-          console.log(id);
-
-          // Vælg det rigtige datasæt
-          let nyData = dataset1;
-          if (id === "klik2") {
-            nyData = dataset2;
-          } else if (id === "klik3") {
-            nyData = dataset3;
-          }
-
-          // Vælg cirkler og lav animation
-          svg.selectAll("circle")
-            .data(nyData)
-            .transition()
-            .duration(1500)
-            .attr("cx", function (d) {
-              return d[0];
-            })
-            .attr("cy", function (d) {
-              return d[1];
-            });
-        });
-    </script>
+        g.selectAll(".bar")
+         .data(data)
+         .enter().append("rect")
+         .attr("class", "bar")
+         .attr("x", function(d) { return xScale(d.mon); })
+         .attr("y", function(d) { return yScale(d.temp); })
+         .attr("width", xScale.bandwidth())
+         .attr("height", function(d) { return height - yScale(d.temp); });
+    });
+    
+</script>
+</section>
 
 
 <section class="facts">

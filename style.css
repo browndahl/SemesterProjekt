@@ -178,12 +178,19 @@ p {
     top: 0;
 }
 
-
-.seaplants{
-    background-color: aquamarine;
+.skagen{
+    background-color: rgb(176, 241, 219);
 }
 
-.seaplants h1 {
+.skagen h1 {
+    text-align: center;
+    padding-top: 50px;
+}
+.global{
+    background-color: rgb(176, 241, 219);
+}
+
+.global h1 {
     text-align: center;
     padding-top: 50px;
 }
