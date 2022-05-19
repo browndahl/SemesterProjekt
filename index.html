@@ -11,7 +11,7 @@
   </head>
 
 
-  <body>
+  
 
     <section class="frontpage">
       <h1 style="font-family:helvetica;">VIL DU GERNE SIGE "HAJ HAJ" TIL DINE BØRN OM 20 ÅR?</h1>
@@ -84,59 +84,59 @@
 
       <style>
         .bar {
-            fill: rgb(70, 180, 107);
+            fill: steelblue;
         }
-    </style>
+
+        .highlight {
+            fill: orange;
+        }
+</style>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-<body>
-<!-- Vi starter med at oprette SVG og definere skalaerne for vores søjlediagram som vist nedenfor. -->
-<svg width="600" height="500"></svg> <!--original 600x500 = Størrelsen på hele grafen-->
+</head>
+
+<svg width="600" height="500"></svg>
 <script>
 
     var svg = d3.select("svg"),
         margin = 200,
         width = svg.attr("width") - margin,
-        height = svg.attr("height") - margin
+        height = svg.attr("height") - margin;
 
-        //Placering af "overskrift"
     svg.append("text")
        .attr("transform", "translate(100,0)")
        .attr("x", 50)
        .attr("y", 50)
        .attr("font-size", "24px")
-       .text("Skagen 2019")
+       .text("Skagen temp")
 
-    var xScale = d3.scaleBand().range([0, width]).padding(0.4),
-        yScale = d3.scaleLinear().range([height, 0]);
+    var x = d3.scaleBand().range([0, width]).padding(0.4),
+        y = d3.scaleLinear().range([height, 0]);
 
-//Nedestående kode har vi et gruppeelement til vores SVG. Vi tilføjer vores akser og bar til gruppeelementet. 
-//Vi tilføjer en transformeringsattribut for at placere vores graf med en vis margin.
     var g = svg.append("g")
-               .attr("transform", "translate(" + 100 + "," + 100 + ")"); // Ænding af grafens placering (original 100+100)
+            .attr("transform", "translate(" + 100 + "," + 100 + ")");
 
     d3.csv("skagen.csv", function(error, data) {
         if (error) {
             throw error;
         }
 
-        xScale.domain(data.map(function(d) { return d.mon; }));
-        yScale.domain([0, 20]); //Her ændre vi på start og slut-værdien på y-aksel
+        x.domain(data.map(function(d) { return d.mon; }));
+        y.domain([0, 20]);
 
         g.append("g")
          .attr("transform", "translate(0," + height + ")")
-         .call(d3.axisBottom(xScale))
+         .call(d3.axisBottom(x))
          .append("text")
-         .attr("y", height - 250)   //Placering af y teksten
-         .attr("x", width - 100)    //Placering af x teksten
+         .attr("y", height - 250)
+         .attr("x", width - 100)
          .attr("text-anchor", "end")
          .attr("stroke", "black")
          .text("months");
 
         g.append("g")
-         .call(d3.axisLeft(yScale).tickFormat(function(d){
-             return d + " c°" ;
-         })
-         .ticks(10))
+         .call(d3.axisLeft(y).tickFormat(function(d){
+             return d+ "c°";
+         }).ticks(10))
          .append("text")
          .attr("transform", "rotate(-90)")
          .attr("y", 6)
@@ -149,25 +149,70 @@
          .data(data)
          .enter().append("rect")
          .attr("class", "bar")
-         .attr("x", function(d) { return xScale(d.mon); })
-         .attr("y", function(d) { return yScale(d.temp); })
-         .attr("width", xScale.bandwidth())
-         .attr("height", function(d) { return height - yScale(d.temp); });
+         .on("mouseover", onMouseOver) //Add listener for the mouseover event
+         .on("mouseout", onMouseOut)   //Add listener for the mouseout event
+         .attr("x", function(d) { return x(d.mon); })
+         .attr("y", function(d) { return y(d.value); })
+         .attr("width", x.bandwidth())
+         .transition()
+         .ease(d3.easeLinear)
+         .duration(400)
+         .delay(function (d, i) {
+             return i * 50;
+         })
+         .attr("height", function(d) { return height - y(d.value); });
     });
     
+    //mouseover event handler function
+    function onMouseOver(d, i) {
+        d3.select(this).attr('class', 'highlight');
+        d3.select(this)
+          .transition()     // adds animation
+          .duration(400)
+          .attr('width', x.bandwidth() + 5)
+          .attr("y", function(d) { return y(d.value) - 10; })
+          .attr("height", function(d) { return height - y(d.value) + 10; });
+
+        g.append("text")
+         .attr('class', 'val') 
+         .attr('x', function() {
+             return x(d.mon);
+         })
+         .attr('y', function() {
+             return y(d.value) - 15;
+         })
+         .text(function() {
+             return [d.value+ 'c°'];  // Value of the text
+         });
+    }
+
+    //mouseout event handler function
+    function onMouseOut(d, i) {
+        // use the text label class to remove label on mouseout
+        d3.select(this).attr('class', 'bar');
+        d3.select(this)
+          .transition()     // adds animation
+          .duration(400)
+          .attr('width', x.bandwidth())
+          .attr("y", function(d) { return y(d.value); })
+          .attr("height", function(d) { return height - y(d.value); });
+
+        d3.selectAll('.val')
+          .remove()
+    }
+
 </script>
 </section>
 
-<section class="global">
+
+<section class="Global">
   <style>
     .bar {
-        fill: rgb(163, 31, 31);
+        fill: steelblue;
     }
 </style>
-<script src="https://d3js.org/d3.v4.min.js"></script>
 
-<!-- Vi starter med at oprette SVG og definere skalaerne for vores søjlediagram som vist nedenfor. -->
-<svg width="600" height="500"></svg> <!--original 600x500 = Størrelsen på hele grafen-->
+<svg width="600" height="500"></svg>
 <script>
 
 var svg = d3.select("svg"),
@@ -175,43 +220,40 @@ var svg = d3.select("svg"),
     width = svg.attr("width") - margin,
     height = svg.attr("height") - margin
 
-    //Placering af "overskrift"
-svg.append("text")
+svg.append("text") //Ændring af teksten
    .attr("transform", "translate(100,0)")
    .attr("x", 50)
    .attr("y", 50)
    .attr("font-size", "24px")
-   .text("Global")
+   .text("XYZ Foods Stock Price")
 
 var xScale = d3.scaleBand().range([0, width]).padding(0.4),
     yScale = d3.scaleLinear().range([height, 0]);
 
-//Nedestående kode har vi et gruppeelement til vores SVG. Vi tilføjer vores akser og bar til gruppeelementet. 
-//Vi tilføjer en transformeringsattribut for at placere vores graf med en vis margin.
-var g1 = svg.append("g1")
-           .attr("transform", "translate(" + 100 + "," + 100 + ")"); // Ænding af grafens placering (original 100+100)
+var g = svg.append("g")
+           .attr("transform", "translate(" + 100 + "," + 100 + ")");
 
 d3.csv("global.csv", function(error, data) {
     if (error) {
         throw error;
     }
 
-    xScale.domain(data.map(function(d1) { return d1.year; }));
-    yScale.domain([0, 20]); //Her ændre vi på start og slut-værdien på y-aksel
+    xScale.domain(data.map(function(d) { return d.year; }));
+    yScale.domain([0, d3.max(data, function(d) { return d.value; })]);
 
-    g1.append("g1")
+    g.append("g")
      .attr("transform", "translate(0," + height + ")")
      .call(d3.axisBottom(xScale))
      .append("text")
-     .attr("y", height - 250)   //Placering af y teksten
-     .attr("x", width - 100)    //Placering af x teksten
+     .attr("y", height - 250)
+     .attr("x", width - 100)
      .attr("text-anchor", "end")
      .attr("stroke", "black")
-     .text("years");
+     .text("Year");
 
-    g1.append("g1")
-     .call(d3.axisLeft(yScale).tickFormat(function(d1){
-         return d1 + " c°" ;
+    g.append("g")
+     .call(d3.axisLeft(yScale).tickFormat(function(d){
+         return "$" + d;
      })
      .ticks(10))
      .append("text")
@@ -220,24 +262,20 @@ d3.csv("global.csv", function(error, data) {
      .attr("dy", "-5.1em")
      .attr("text-anchor", "end")
      .attr("stroke", "black")
-     .text("Temperature");
+     .text("Stock Price");
 
-    g1.selectAll(".bar")
+    g.selectAll(".bar")
      .data(data)
      .enter().append("rect")
      .attr("class", "bar")
-     .attr("x", function(d1) { return xScale(d1.year); })
-     .attr("y", function(d1) { return yScale(d1.value); })
+     .attr("x", function(d) { return xScale(d.year); })
+     .attr("y", function(d) { return yScale(d.value); })
      .attr("width", xScale.bandwidth())
-     .attr("height", function(d1) { return height - yScale(d1.value); });
+     .attr("height", function(d) { return height - yScale(d.value); });
 });
 
 </script>
-
-
 </section>
-
-
 
 
 

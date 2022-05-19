@@ -188,6 +188,8 @@ p {
 }
 .global{
     background-color: rgb(59, 116, 97);
+    width: 250px;
+    left: 140px;
 }
 
 .global h2 {
