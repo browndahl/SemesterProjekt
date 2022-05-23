@@ -16,12 +16,15 @@
   
   <script src="https://d3js.org/d3.v4.min.js"></script>
       <script>
+          
   d3.select("#bubble")
       .append("svg")
       .append("g")
       .append("circle")
       .attr("class", "bubble")
       .attr("transform", "translate(100, 100)")
+      .attr("cx", 10)
+      .attr("cy", 10)
       .attr("r", 50)
       .attr("fill", "black");
   

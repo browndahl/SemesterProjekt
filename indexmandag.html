@@ -9,6 +9,12 @@
 
 <body style="background-color:powderblue;">
 
+
+   <div id="testclick"></div>
+   <div id="buttonHide"><button>Hide</button></div>
+   <div id="buttonShow"><button>Show</button></div>
+
+
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script>
         
@@ -30,7 +36,7 @@
     if (error) {
         throw error;
     }
-  
+
     //Ændringer af overskrift 
 svg.append("text")
    .attr("transform", "translate(100,0)")
@@ -38,6 +44,127 @@ svg.append("text")
    .attr("y", 50)
    .attr("font-size", "24px")
    .text("VIL DU GERNE SIGE HAJ HAJ TIL DINE BØRN OM 20 ÅR?")
+
+   //Baseline for 2040-urealistisk (20 grader)
+   svg.append("line")
+       .attr("x1", 100)
+       .attr("x2", 1300)
+       .attr("y1", 301)
+       .attr("y2", 301)
+       .attr("stroke", "black");
+    
+    svg.append("text")            // append text
+    .attr("transform", "translate(100,0)")
+    .style("fill", "black")      // make the text black
+    .attr("x", 301)         // set x position of left side of text
+    .attr("y",301)  // set y position of bottom of text
+    .text("2040-urealistisk");   // define the text to display
+
+   //Baseline for 2040-realistisk (15 grader)
+   svg.append("line")
+       .attr("x1", 100)
+       .attr("x2", 1300)
+       .attr("y1", 401)
+       .attr("y2", 401)
+       .attr("stroke", "grey");
+    
+    svg.append("text")            // append text
+    .attr("transform", "translate(100,0)")
+    .style("fill", "black")      // make the text black
+    .attr("x", 401)         // set x position of left side of text
+    .attr("y",401)  // set y position of bottom of text
+    .text("2040-realistisk");   // define the text to display
+
+    //SVG cirkler (fisk)
+    svg.append("circle")
+    .attr("id", "Torsk")
+    .attr("cx", 200)
+    .attr("cy", 580)
+    .attr("r", 20)
+    .style("fill", d3.color("steelblue"))
+
+    svg.append("circle")
+    .attr("id", "Sild")
+    .attr("cx", 300)
+    .attr("cy", 380)
+    .attr("r", 20)
+    .style("fill", d3.color("green"))
+
+    svg.append("circle")
+    .attr("id", "Tun")
+    .attr("cx", 400)
+    .attr("cy", 580)
+    .attr("r", 20)
+    .style("fill", d3.color("red"))
+
+    svg.append("circle")
+    .attr("id", "Hvidhaj")
+    .attr("cx", 520)
+    .attr("cy", 380)
+    .attr("r", 20)
+    .style("fill", d3.color("yellow"))
+
+    svg.append("circle")
+    .attr("id", "Laks")
+    .attr("cx", 645)
+    .attr("cy", 580)
+    .attr("r", 20)
+    .style("fill", d3.color("darkblue"))
+
+    svg.append("circle")
+    .attr("id", "Rodspatte")
+    .attr("cx", 760)
+    .attr("cy", 380)
+    .attr("r", 20)
+    .style("fill", d3.color("pink"))
+
+    svg.append("circle")
+    .attr("id", "Havorred")
+    .attr("cx", 890)
+    .attr("cy", 380)
+    .attr("r", 20)
+    .style("fill", d3.color("lightgreen"))
+
+    svg.append("circle")
+    .attr("id", "Blamuslinger")
+    .attr("cx", 980)
+    .attr("cy", 380)
+    .attr("r", 20)
+    .style("fill", d3.color("purple"))
+
+    svg.append("circle")
+    .attr("id", "Osters")
+    .attr("cx", 1100)
+    .attr("cy", 380)
+    .attr("r", 20)
+    .style("fill", d3.color("grey"))
+
+    svg.append("circle")
+    .attr("id", "Brandmand")
+    .attr("cx", 1200)
+    .attr("cy", 380)
+    .attr("r", 20 )
+    .style("fill", "#69b3a2")
+
+    ////////TEST/////////
+
+    d3.select("#testclick")
+      .append("svg")
+      .append("g")
+      .append("circle")
+      .attr("class", "testclick")
+      .attr("transform", "translate(100, 100)")
+      .attr("r", 50)
+      .attr("fill", "black");
+  
+  d3.select("#buttonHide").on("click", function() {
+      d3.select(".testclick").transition().attr('visibility', 'hidden').duration(1000);
+  });
+  
+  d3.select("#buttonShow").on("click", function() {
+      d3.select(".testclick").transition().attr('visibility', 'visible').duration(1000);
+  });
+
 
 
 var x = d3.scaleBand().range([0, width]).padding(0.4),
@@ -87,70 +214,60 @@ var g = svg.append("g")
  <div class="Torsk">
     <button onclick="myFunction()">Torsk</button>
     <svg height="100" width="100">
-        <circle cx="50" cy="50" r="20" stroke="black" stroke-width="3" fill="black" />
       </svg>
  </div>
 
  <div class="Sild">
     <button onclick="myFunction()">Sild</button>
     <svg height="100" width="100">
-        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
       </svg>
  </div>
 
  <div class="Tun">
     <button onclick="myFunction()">Tun</button>
     <svg height="100" width="100">
-        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
       </svg>
  </div>
 
  <div class="Hvidhaj">
     <button onclick="myFunction()">Hvidhaj</button>
     <svg height="100" width="100">
-        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
       </svg>
  </div>
 
  <div class="Laks">
     <button onclick="myFunction()">Laks</button>
     <svg height="100" width="100">
-        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
       </svg>
  </div>
 
  <div class="Roedspaette">
     <button onclick="myFunction()">Rødspætte</button>
     <svg height="100" width="100">
-        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
       </svg>
  </div>
 
  <div class="Havoerred">
     <button onclick="myFunction()">Havørred</button>
     <svg height="100" width="100">
-        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
       </svg>
  </div>
 
  <div class="Blaamusling">
     <button onclick="myFunction()">Blåmusling</button>
     <svg height="100" width="100">
-        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
       </svg>
  </div>
 
  <div class="Oesters">
     <button onclick="myFunction()">Østers</button>
     <svg height="100" width="100">
-        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
       </svg>
  </div>
 
  <div class="Brandmaend">
     <button onclick="myFunction()">Brandmænd</button>
     <svg height="100" width="100">
-        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
       </svg>
  </div>
   </section>
