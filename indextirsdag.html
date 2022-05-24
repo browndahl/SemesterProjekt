@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Haj Haj</title>
+    <meta charset="utf-8">
+    <title>Semesterprojekt</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Roboto+Flex:opsz,wght@8..144,300&display=swap" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+</head>
+
+<body style="background-image: url('img/fisk3.jpg');">
+
+<!------ <div class="intro"> 
+        <h1 class="logo-header">
+            <span class="logo">VIL DU GERNE SIGE</span>
+            <span class="logo"></span> 
+            <span class="logo">"HAJ HAJ" TIL DINE BØRN </span>
+            <span class="logo"> </span>
+            <span class="logo"> OM 20 ÅR?</span>
+
+        </h1>
+    </div>------------>
+
+
+    
+<script src="d3.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <script>
+
+
+        //Indsættelse af lokal.data.csv
+        const dataset3 = d3.csv("graf.csv", function (error, dataset3) {
+            if (error) {
+                throw error;
+            }
+
+
+            var x = d3.scaleBand().range([0, width]).padding(0.4),
+                y = d3.scaleLinear().range([height, 0]);
+
+            var g = svg.append("g")
+                .attr("transform", "translate(" + 100 + "," + 100 + ")");
+
+
+            //Her kan vi ændre på min og max på y-aksel.
+            x.domain(dataset3.map(function (d) { return d.mon; }));
+            y.domain([0, 30]);
+
+
+            //Ændringer af y-aksel
+            g.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x))
+                .append("text")
+                .attr("y", height - 150)
+                .attr("x", width - 10)
+                .attr("font-size", "20px")
+                .attr("text-anchor", "end")
+                .attr("stroke", "black")
+                .text("Fisk");
+
+
+            //Ændringer af x-aksel
+            g.append("g")
+                .call(d3.axisLeft(y).tickFormat(function (d) {
+                    return d + "c°";
+                }).ticks(10))
+                .append("text")
+                .attr("transform", "rotate(0)")
+                .attr("y", 30)
+                .attr("font-size", "10px")
+                .attr("dy", "-5.1em")
+                .attr("text-anchor", "end")
+                .attr("stroke", "black")
+                .text("Temperatur");
+
+        });
+        const w = 1400;
+        const h = 800;
+
+        // Lav SVG-elementet-
+        const svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+
+            //Placering imellem grafen og "bottons" 
+        margin = 130,
+            width = svg.attr("width") - margin,
+            height = svg.attr("height") - margin;
+
+        //SVG cirkler (fisk)
+        svg.append("image")
+            .attr("id", "torsk")
+            .attr('xlink:href', './img/cod.png')
+            .attr("x", 120)
+            .attr("y", 470)
+            .attr('width', 350)
+            .attr('height', 330)
+        function toggleVisibility() {
+            // Determine if current line is visible
+            var active = torsk.active ? false : true,
+                newOpacity = active ? 0 : 1;
+            // Hide or show the elements
+            d3.select("#torsk").style("opacity", newOpacity);
+            // Update whether or not the elements are active
+            torsk.active = active;
+        };
+
+        svg.append("image")
+            .attr("id", "Sild")
+            .attr('xlink:href', './img/sild.png')
+            .attr("x", 240)
+            .attr("y", 470)
+            .attr('width', 202)
+            .attr('height', 220)
+        function Sild() {
+            // Determine if current line is visible
+            var active = Sild.active ? false : true,
+                newOpacity = active ? 0 : 1;
+            // Hide or show the elements
+            d3.select("#Sild").style("opacity", newOpacity);
+            // Update whether or not the elements are active
+            Sild.active = active;
+            
+        };
+
+        svg.append("image")
+            .attr("id", "Tun")
+            .attr('xlink:href', './img/tuna.png')
+            .attr("x", 460)
+            .attr("y", 380)
+            .attr('width', 60)
+            .attr('height', 60)
+        function Tun() {
+            // Determine if current line is visible
+            var active = Tun.active ? false : true,
+                newOpacity = active ? 0 : 1;
+            // Hide or show the elements
+            d3.select("#Tun").style("opacity", newOpacity);
+            // Update whether or not the elements are active
+            Tun.active = active;
+        };
+
+        svg.append("image")
+            .attr("id", "Hvidhaj")
+            .attr('xlink:href', './img/shark.png')
+            .attr("x", 460)
+            .attr("y", 155)
+            .attr('width', 240)
+            .attr('height', 360)
+        function Hvidhaj() {
+            // Determine if current line is visible
+            var active = Hvidhaj.active ? false : true,
+                newOpacity = active ? 0 : 1;
+            // Hide or show the elements
+            d3.select("#Hvidhaj").style("opacity", newOpacity);
+            // Update whether or not the elements are active
+            Hvidhaj.active = active;
+        };
+
+
+        svg.append("image")
+            .attr("id", "Laks")
+            .attr('xlink:href', './img/salmon.png')
+            .attr("x", 700)
+            .attr("y", 530)
+            .attr('width', 125)
+            .attr('height', 125)
+        function Laks() {
+            // Determine if current line is visible
+            var active = Laks.active ? false : true,
+                newOpacity = active ? 0 : 1;
+            // Hide or show the elements
+            d3.select("#Laks").style("opacity", newOpacity);
+            // Update whether or not the elements are active
+            Laks.active = active;
+        };
+
+        svg.append("image")
+            .attr("id", "Rodspatte")
+            .attr('xlink:href', './img/rod.png')
+            .attr("x", 760)
+            .attr("y", 200)
+            .attr('height', 60)
+            .attr('width', 60)
+        function Rodspatte() {
+            // Determine if current line is visible
+            var active = Rodspatte.active ? false : true,
+                newOpacity = active ? 0 : 1;
+            // Hide or show the elements
+            d3.select("#Rodspatte").style("opacity", newOpacity);
+            // Update whether or not the elements are active
+            Rodspatte.active = active;
+        };
+
+
+        svg.append("image")
+            .attr("id", "Havorred")
+            .attr('xlink:href', './img/hav.png')
+            .attr("x", 560)
+            .attr("y", 480)
+            .attr('width', 60)
+            .attr('height', 60)
+        function Havorred() {
+            // Determine if current line is visible
+            var active = Havorred.active ? false : true,
+                newOpacity = active ? 0 : 1;
+            // Hide or show the elements
+            d3.select("#Havorred").style("opacity", newOpacity);
+            // Update whether or not the elements are active
+            Havorred.active = active;
+        };
+
+
+        svg.append("image")
+            .attr("id", "Blamuslinger")
+            .attr('xlink:href', './img/blaa.png')
+            .attr("x", 770)
+            .attr("y", 480)
+            .attr('width', 60)
+            .attr('height', 60)
+        function Blamuslinger() {
+            // Determine if current line is visible
+            var active = Blamuslinger.active ? false : true,
+                newOpacity = active ? 0 : 1;
+            // Hide or show the elements
+            d3.select("#Blamuslinger").style("opacity", newOpacity);
+            // Update whether or not the elements are active
+            Blamuslinger.active = active;
+        };
+
+        svg.append("image")
+            .attr("id", "Brandmand")
+            .attr('xlink:href', './img/jelly.png')
+            .attr("x", 950)
+            .attr("y", 260)
+            .attr('width', 460)
+            .attr('height', 300)
+        function Brandmand() {
+            // Determine if current line is visible
+            var active = Brandmand.active ? false : true,
+                newOpacity = active ? 0 : 1;
+            // Hide or show the elements
+            d3.select("#Brandmand").style("opacity", newOpacity);
+            // Update whether or not the elements are active
+            Brandmand.active = active;
+        };
+
+         //Baseline for 2040-realistisk (15 grader)
+   svg.append("line")
+        .attr("id", "Realistisk")
+       .attr("x1", 100)
+       .attr("x2", 1300)
+       .attr("y1", 401)
+       .attr("y2", 401)
+       .attr("stroke", "grey");
+       function Realistisk() {
+            // Determine if current line is visible
+            var active = Realistisk.active ? false : true,
+                newOpacity = active ? 0 : 1;
+            // Hide or show the elements
+            d3.select("#Realistisk").style("opacity", newOpacity);
+            // Update whether or not the elements are active
+            Realistisk.active = active;
+         };
+
+    //Baseline for 2040-urealistisk (20 grader)
+   svg.append("line")
+        .attr("id","Urealistisk")
+       .attr("x1", 100)
+       .attr("x2", 1300)
+       .attr("y1", 301)
+       .attr("y2", 301)
+       .attr("stroke", "black");
+       function Urealistisk() {
+            // Determine if current line is visible
+            var active = Urealistisk.active ? false : true,
+                newOpacity = active ? 0 : 1;
+            // Hide or show the elements
+            d3.select("#Urealistisk").style("opacity", newOpacity);
+            // Update whether or not the elements are active
+            Urealistisk.active = active;
+         };
+
+    
+
+
+
+    </Script>
+    <div class="button-contener">
+        <button class="fish-button" onclick="toggleVisibility()">torsk</button>
+        <button class="fish-button" onclick="Sild()">Sild</button>
+        <button class="fish-button" onclick="Tun()">Tun</button>
+        <button class="fish-button" onclick="Hvidhaj()">Hvidhaj</button>
+        <button class="fish-button" onclick="Laks()">Laks</button>
+        <button class="fish-button" onclick="Rodspatte()">Rodspatte</button>
+        <button class="fish-button" onclick="Havorred()">Havorred</button>
+        <button class="fish-button" onclick="Blamuslinger()">Blamuslinger</button>
+        <button class="fish-button" onclick="Brandmand()">Brandmand</button>
+        <button class="fish-button" onclick="Realistisk()">Realistisk</button>
+        <button class="fish-button" onclick="Urealistisk()">Urealistisk</button>
+    </div>
+</body>
+
+</html>

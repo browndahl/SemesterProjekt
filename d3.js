@@ -19649,3 +19649,29 @@ exports.zoomTransform = transform$1;
 Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
+let intro = document.querySelector('.intro');
+let logo = document.querySelector('.logo-header');
+let logoSpan = document.querySelectorAll('.logo');
+window.addEventListener('DOMContentLoaded', ()=>{
+
+    setTimeout(()=>{
+        logoSpan.forEach((span, idx)=>{
+            setTimeout(()=>{
+                span.classList.add('active');
+            }, (idx + 0.1) * 400)
+        });
+        setTimeout(()=>{
+            logoSpan.forEach((span, idx)=>{
+                setTimeout(()=>{
+                    span.classList.remove('active');
+                    span.classList.add('fade');
+
+                }, (idx + 0.1) * 50)
+            })
+        }, 3000);
+
+        setTimeout(()=>{
+            intro.style.top = '-100vh'
+        }, 4000)
+    })
+})

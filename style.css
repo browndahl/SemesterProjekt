@@ -2,14 +2,101 @@ body {
     margin: 0;
     background-color: grey;
 }
-.Fisk {
+.Fisk{
     justify-content: space-around;
     display: flex;
     flex-direction: row;
     align-content: center;
     margin: auto;
+
 }
 
-.Tun svg{
-    height: -70px;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Koulen', cursive;
+    font-family: 'Roboto Flex', sans-serif;
+    
 }
+
+
+header{
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 1005;
+    height: 80px;
+}
+
+header h4 {
+    position: absolute;
+    left: 10%;
+    bottom: 1rem;
+    font-size: 1.6rem;
+}
+
+/* Splash screen */
+
+.intro { 
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    transition: 4s;
+    background-image: url('img/shark1.jpg');
+    background-size: cover;
+}
+
+.logo-header {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fdfafa;
+}
+
+.logo {
+    position: relative;
+    display: inline-block;
+    bottom: -40px;
+    opacity: 0;
+    font-size: 50px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-style:italic
+    
+    
+}
+
+.logo.active {
+    bottom: 0;
+    opacity: 1;
+    transition: ease-in-out 1s;
+}
+
+.logo.fade {
+    bottom: 150px;
+    opacity: 0;
+    transition: ease-in-out 2s; 
+}
+
+.fish-button{
+    width: 130px;
+    height: 20px;
+    margin-right: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 0;
+    
+    
+}
+.button-contener{
+    margin-left: 100px;
+}
+
+.fish-button:hover{
+    background-color: rgb(255, 233, 134);
+}
+

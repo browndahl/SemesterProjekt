@@ -1,41 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    <head>
+        <meta charset="utf-8">
+        <title>Scatter Plot animation</title>
+        <script type="text/javascript" src="d3.js"></script>
+        <link rel="stylesheet" href="style.css">
+      </head>
 <body style="background-color:powderblue;">
 
-  <head>
-    <meta charset="utf-8">
-    <title>Scatter Plot animation</title>
-    <script type="text/javascript" src="d3.js"></script>
-    <link rel="stylesheet" href="style.css">
-  </head>
 
-  <div id="bubble"></div>
-  <div id="buttonHide"><button>Hide</button></div>
-  <div id="buttonShow"><button>Show</button></div>
-  
   <script src="https://d3js.org/d3.v4.min.js"></script>
       <script>
           
-  d3.select("#bubble")
-      .append("svg")
-      .append("g")
-      .append("circle")
-      .attr("class", "bubble")
-      .attr("transform", "translate(100, 100)")
-      .attr("cx", 10)
-      .attr("cy", 10)
-      .attr("r", 50)
-      .attr("fill", "black");
-  
-  d3.select("#buttonHide").on("click", function() {
-      d3.select(".bubble").transition().attr('visibility', 'hidden').duration(1000);
-  });
-  
-  d3.select("#buttonShow").on("click", function() {
-      d3.select(".bubble").transition().attr('visibility', 'visible').duration(1000);
-  });
-  
+          <svg>
+	<circle cx="150" cy="100" r="20" fill="teal"></circle>
+	<text x="20" y="100">Click me</text>
+</svg>
+
+          var circle = d3.select("circle")
+var toggle = true;
+d3.select("text").on("click", ()=>{
+	circle.style("visibility", toggle ? "hidden" : "visible");
+	toggle = !toggle;
+})
 
 </script>
 
