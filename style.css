@@ -100,3 +100,11 @@ header h4 {
     background-color: rgb(255, 233, 134);
 }
 
+#Realistisk:hover{
+    background-color: rgb(219, 131, 77);
+
+}
+#Urealistisk:hover{
+    background-color: rgb(255, 0, 0);
+
+}
