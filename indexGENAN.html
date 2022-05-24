@@ -10,10 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Roboto+Flex:opsz,wght@8..144,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     
 </head>
 
@@ -23,7 +22,7 @@
 
 <body style="background-image: url('img/fisk3.jpg');">
 
-
+//*
     <div class="intro"> 
         <h1 class="logo-header">
             <span class="logo">VIL DU GERNE SIGE</span>
@@ -34,9 +33,8 @@
 
         </h1>
     </div>
- 
+  //*
 
-     
     
 <script src="d3.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -49,6 +47,7 @@
             if (error) {
                 throw error;
             }
+
 
             var x = d3.scaleBand().range([0, width]).padding(0.4),
                 y = d3.scaleLinear().range([height, 0]);
@@ -275,9 +274,9 @@
         .attr("id", "Realistisk")
        .attr("x1", 100)
        .attr("x2", 1300)
-       .attr("y1", 432)
-       .attr("y2", 432)
-       .attr("stroke", "rgb(255, 98, 0)")
+       .attr("y1", 401)
+       .attr("y2", 401)
+       .attr("stroke", "yellow")
        .style ("opacity", 0);
        function Realistisk() {
             // Determine if current line is visible
@@ -329,28 +328,32 @@
         <button class="fish-button" onclick="Tun()">Tun</button>
         <button class="fish-button" onclick="Sild()">Sild</button>
         <button class="fish-button" onclick="Laks()">Laks</button>
-        <button class="fish-button" onclick="Brandmand()">Brandmænd</button>
-        <button class="fish-button" onclick="Havorred()">Havørred</button>
-        <button class="fish-button" onclick="Blamuslinger()">Blåmuslinger</button>
-        <button class="fish-button" onclick="Rodspatte()">Rødspatte</button>
+        <button class="fish-button" onclick="Brandmand()">Brandmand</button>
+        <button class="fish-button" onclick="Havorred()">Havorred</button>
+        <button class="fish-button" onclick="Blamuslinger()">Blamuslinger</button>
+        <button class="fish-button" onclick="Rodspatte()">Rodspatte</button>
         <button class="line1" id="Realistisk" onclick="Realistisk()">2100-Realistisk</button>
         <button class="line2" id="Urealistisk" onclick="Urealistisk()">2100-Urealistisk</button>
     </div>
 
-    <div class="box">
-          <h2>Information</h2>
-          <p style ="font-size:1vw">-Størrelsen på de forskellige fisk afhænger af deres min og max leve-temperatur.
-            <br>  -Fra 1970 til 2020 er den globale havvandstemperatur steget med 1 grad.
-            <br>  -I Danmark(Skagen) ligger den gennemsnitlige havvandstemperatur på 10 grader.
-            <br>  -Ifølge forskere vil havvandstemperaturen(global) på bare 80 år stige med gennemstligt 5-6 grader, 
-            <br>  mens nogle andre mener, at det vil stige endnu voldsommere, hvor man er ude i 10 grader.
-            <br>  Kan du så forestille dig Danmark med en gennemsnitlig havvandstemperatur på næsten 20 grader?
-            <br><br>
-            
-        </p>
-    </div>
+    <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="img/hajhaj.jpeg" style="width:350px;height:550px;">
+          </div>
+          <div class="flip-card-back">
+            <h2>Information</h2>
+                <p>-Størrelsen på de forskellige fisk afhænger af deres min og max leve-temperatur.
+                  <br> -Fra 1970 til 2020 er den globale havvandstemperatur steget med 1 grad.
+                  <br> -I Danmark(Skagen) ligger den gennemsnitlige havvandstemperatur på 10 grader.
+                  <br> -Ifølge forskere vil havvandstemperaturen(global) på bare 80 år stige med gennemstligt 5-6 grader, 
+                  <br> mens nogle andre mener, at det vil stige endnu voldsommere, hvor man er ude i 10 grader.
+                  <br> Kan du så forestille dig Danmark med en gennemsnitlig havvandstemperatur på næsten 20 grader?
+                </p>
+          </div>
+        </div>
+      </div>
 
-    
 
 </body>
 
