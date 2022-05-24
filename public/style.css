@@ -83,6 +83,16 @@ header h4 {
     transition: ease-in-out 2s; 
 }
 
+
+.tryknu {
+    margin-top: 30px;
+    align-items: center; 
+    justify-content: center; 
+    text-align: center;
+}
+
+
+
 .fish-button{
     width: 130px;
     height: 20px;
@@ -121,9 +131,6 @@ header h4 {
     background-color: aliceblue;
 }
 
-.p {
-    font-size: 40px;
-  }
 
 
 

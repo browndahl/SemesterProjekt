@@ -16,20 +16,24 @@
     
 </head>
 
+<div class="tryknu">
 <h1 style="font-family:helvetica;">Tryk for at se fiskenes levetemperatur</h1>
+</div>
 
 <body style="background-image: url('img/fisk3.jpg');">
 
-     <div class="intro"> git push heroku main
+
+    <div class="intro"> 
         <h1 class="logo-header">
             <span class="logo">VIL DU GERNE SIGE</span>
             <span class="logo"></span> 
-            <span class="logo">"HAJ HAJ" TIL DINE BØRN </span>
+            <span class="logo">"HAJ HAJ" TIL DIN FAMILIE </span>
             <span class="logo"> </span>
-            <span class="logo"> OM 20 ÅR?</span>
+            <span class="logo"> OM 80 ÅR?</span>
 
         </h1>
     </div>
+     
 
     
 <script src="d3.js"></script>
@@ -265,7 +269,7 @@
             Rodspatte.active = active;
         };
 
-         //Baseline for 2040-realistisk (15 grader)
+         //Baseline for 2100-realistisk (15 grader)
    svg.append("line")
         .attr("id", "Realistisk")
        .attr("x1", 100)
@@ -284,14 +288,13 @@
             Realistisk.active = active;
          };
 
-
-    //Baseline for 2040-urealistisk (20 grader)
+    //Baseline for 2100-urealistisk (20 grader)
    svg.append("line")
         .attr("id","Urealistisk")
        .attr("x1", 100)
        .attr("x2", 1300)
-       .attr("y1", 300)
-       .attr("y2", 300)
+       .attr("y1", 320)
+       .attr("y2", 320)
        .attr("stroke", "red")
        .style ("opacity", 0);
        function Urealistisk() {
@@ -303,6 +306,17 @@
             // Update whether or not the elements are active
             Urealistisk.active = active;
          };
+
+         //Baseline for Danmarks(skagen) gennemsnitlige havvandstemperatur 
+         svg.append("line")
+        .attr("id","Urealistisk")
+       .attr("x1", 100)
+       .attr("x2", 1300)
+       .attr("y1", 550)
+       .attr("y2", 550)
+       .attr("stroke", "white")
+
+
 
 
 
@@ -318,16 +332,18 @@
         <button class="fish-button" onclick="Havorred()">Havorred</button>
         <button class="fish-button" onclick="Blamuslinger()">Blamuslinger</button>
         <button class="fish-button" onclick="Rodspatte()">Rodspatte</button>
-        <button class="fish-button" id="Realistisk" onclick="Realistisk()">2040-Realistisk</button>
-        <button class="fish-button" id="Urealistisk" onclick="Urealistisk()">2040-Urealistisk</button>
+        <button class="fish-button" id="Realistisk" onclick="Realistisk()">2100-Realistisk</button>
+        <button class="fish-button" id="Urealistisk" onclick="Urealistisk()">2100-Urealistisk</button>
     </div>
 
     <div class="box">
           <h2>Information</h2>
-          <p style ="font-size:1vw">-Størrelsen på de forskellige fisk afhænger af deres min og max leve-temperatur
-            <br> -De to nederste linjer 1970 (11 C°) og 2020(12 C°) fortæller havvandstemperatur stigningen hen over 50 år (gennemsnitligt 1 grad)
-            <br> -
-            
+          <p style ="font-size:1vw">-Størrelsen på de forskellige fisk afhænger af deres min og max leve-temperatur.
+            <br> -Fra 1970 til 2020 er den globale havvandstemperatur steget med 1 grad.
+            <br> -I Danmark(Skagen) ligger den gennemsnitlige havvandstemperatur på 10 grader.
+            <br> -Ifølge forskere vil havvandstemperaturen(global) på bare 80 år stige med gennemstligt 5-6 grader, 
+            <br> mens nogle andre mener, at det vil stige endnu voldsommere, hvor man er ude i 10 grader.
+            <br> Kan du så forestille dig Danmark med en gennemsnitlig havvandstemperatur på næsten 20 grader?
         
         </p>
     </div>
