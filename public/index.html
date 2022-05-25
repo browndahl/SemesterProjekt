@@ -23,8 +23,7 @@
 
 <body style="background-image: url('img/fisk3.jpg');">
 
-
-    <div class="intro"> 
+    <!---<div class="intro"> 
         <h1 class="logo-header">
             <span class="logo">VIL DU GERNE SIGE</span>
             <span class="logo"></span> 
@@ -33,7 +32,8 @@
             <span class="logo"> OM 80 ÅR?</span>
 
         </h1>
-    </div>
+    </div>------>
+    
  
 
      
@@ -59,10 +59,10 @@
 
             //Her kan vi ændre på min og max på y-aksel.
             x.domain(dataset3.map(function (d) { return d.mon; }));
-            y.domain([0, 30]);
+            y.domain([0, 30])();
+            
 
-
-            //Ændringer af y-aksel
+            //Ændringer af x-aksel
             g.append("g")
                 .attr("transform", "translate(0," + height + ")")
                 .call(d3.axisBottom(x))
@@ -74,8 +74,7 @@
                 .attr("stroke", "black")
                 .text("Fisk");
 
-
-            //Ændringer af x-aksel
+            //Ændringer af y-aksel
             g.append("g")
                 .call(d3.axisLeft(y).tickFormat(function (d) {
                     return d + "c°";
@@ -88,7 +87,7 @@
                 .attr("text-anchor", "end")
                 .attr("stroke", "black")
                 .text("Temperatur");
-
+            
         });
         const w = 1400;
         const h = 800;
@@ -318,13 +317,10 @@
        .attr("stroke", "white")
 
 
-
-
-
     </Script>
 
     <div class="button-contener">
-        <button class="fish-button" onclick="Torsk()">Torsk</button>
+        <button class="fish-button" onclick="Torsk()" >Torsk</button>
         <button class="fish-button" onclick="Hvidhaj()">Hvidhaj</button>
         <button class="fish-button" onclick="Tun()">Tun</button>
         <button class="fish-button" onclick="Sild()">Sild</button>
@@ -333,18 +329,18 @@
         <button class="fish-button" onclick="Havorred()">Havørred</button>
         <button class="fish-button" onclick="Blamuslinger()">Blåmuslinger</button>
         <button class="fish-button" onclick="Rodspatte()">Rødspatte</button>
-        <button class="line1" id="Realistisk" onclick="Realistisk()">2100-Realistisk</button>
-        <button class="line2" id="Urealistisk" onclick="Urealistisk()">2100-Urealistisk</button>
+        <button class="fish-button" id="Realistisk" onclick="Realistisk()">2100-Optimist</button>
+        <button class="fish-button" id="Urealistisk" onclick="Urealistisk()">2100-Pessimist</button>
     </div>
 
     <div class="box">
           <h2>Information</h2>
-          <p style ="font-size:1vw">-Størrelsen på de forskellige fisk afhænger af deres min og max leve-temperatur.
+          <p style ="font-size:1vw">-Højden på de forskellige fisk afhænger af deres min og max leve-temperatur.
             <br>  -Fra 1970 til 2020 er den globale havvandstemperatur steget med 1 grad.
-            <br>  -I Danmark(Skagen) ligger den gennemsnitlige havvandstemperatur på 10 grader.
+            <br>  -I Danmark(Skagen) ligger den årlige gennemsnitlige havvandstemperatur på 10 grader.
             <br>  -Ifølge forskere vil havvandstemperaturen(global) på bare 80 år stige med gennemstligt 5-6 grader, 
             <br>  mens nogle andre mener, at det vil stige endnu voldsommere, hvor man er ude i 10 grader.
-            <br>  Kan du så forestille dig Danmark med en gennemsnitlig havvandstemperatur på næsten 20 grader?
+            <br>  Kan du så forestille dig Danmark med en årlige gennemsnitlig havvandstemperatur på næsten 20 grader?
             <br><br>
             
         </p>
